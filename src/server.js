@@ -7,7 +7,6 @@ import {
   badRequestHandler,
   notFoundHandler,
   genericErrorHandler,
-  unauthorizedHandler,
 } from "./errorHandlers.js";
 
 const server = express();
@@ -22,7 +21,6 @@ server.use("/blogs", blogPostRouter);
 
 //ERROR HANDLING
 server.use(badRequestHandler);
-server.use(unauthorizedHandler);
 server.use(notFoundHandler);
 server.use(genericErrorHandler);
 
@@ -36,6 +34,6 @@ mongoose.connection.on("connected", () => {
   });
 });
 
-server.on("error", (erorr) => {
-  console.log("CONTROLLED ERROR", erorr);
+server.on("error", (err) => {
+  console.log("CONTROLLED ERROR", err);
 });

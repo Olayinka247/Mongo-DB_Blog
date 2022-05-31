@@ -30,13 +30,13 @@ blogPostRouter.get("/:blogId", async (req, res, next) => {
     if (blogPost) {
       res.send(blogPost);
     } else {
-      next(createError(404, `User with id ${req.params.userId} not found!`));
+      next(createError(404, `Blog with id ${req.params.blogId} not found!`));
     }
   } catch (error) {
     next(error);
   }
 });
-blogPostRouter.put("/blogId", async (req, res, next) => {
+blogPostRouter.put("/:blogId", async (req, res, next) => {
   try {
     const updatePost = await Blog.findByIdAndUpdate(
       req.params.blogId,
@@ -46,16 +46,24 @@ blogPostRouter.put("/blogId", async (req, res, next) => {
         runValidators: true,
       }
     );
-    res.send(updatePost);
+    if (updatePost) {
+      res.send(updatePost);
+    } else {
+      next(createError(404, `Blog with id ${req.params.blogId} not found!`));
+    }
   } catch (error) {
     next(error);
   }
 });
 
-blogPostRouter.delete("/blogId", async (req, res, next) => {
+blogPostRouter.delete("/:blogId", async (req, res, next) => {
   try {
     const deletePost = await Blog.findByIdAndDelete(req.params.blogId);
-    res.send(deletePost);
+    if (deletePost) {
+      res.status(204).send();
+    } else {
+      next(createError(404, `Blog with id ${req.params.blogId} not found!`));
+    }
   } catch (error) {
     next(error);
   }
