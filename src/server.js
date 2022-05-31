@@ -2,6 +2,7 @@ import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
 import listEndpoints from "express-list-endpoints";
+import blogPostRouter from "./services/blogs/index.js";
 
 const server = express();
 const port = process.env.PORT || 3001;
@@ -11,6 +12,7 @@ server.use(express.json());
 server.use(cors());
 
 // ROUTES
+server.use("/blogs", blogPostRouter);
 
 //ERROR HANDLING
 
