@@ -16,7 +16,7 @@ server.use(cors());
 
 mongoose.connect(process.env.MONGO_CONNECTION_URL);
 
-mongoose.connection.on("Connected", () => {
+mongoose.connection.on("connected", () => {
   console.log("Mongoose is connected");
   server.listen(port, () => {
     console.table(listEndpoints(server));
