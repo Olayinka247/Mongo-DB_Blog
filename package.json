@@ -17,7 +17,8 @@
     "express-list-endpoints": "^6.0.0",
     "express-validator": "^6.14.1",
     "https-error": "^1.0.2",
-    "mongoose": "^6.3.5"
+    "mongoose": "^6.3.5",
+    "query-to-mongo": "^0.10.2"
   },
   "devDependencies": {
     "dotenv": "^16.0.1",
