@@ -17,8 +17,6 @@ blogPostRouter.post("/", async (req, res, next) => {
 
 blogPostRouter.get("/", async (req, res, next) => {
   try {
-    console.log("QUERY: ", req.query);
-    console.log("MONGO-QUERY: ", q2m(req.query));
     const mongoQuery = q2m(req.query);
     const total = await Blog.countDocuments(mongoQuery.criteria);
     const blogPosts = await Blog.find(
@@ -42,7 +40,10 @@ blogPostRouter.get("/", async (req, res, next) => {
 blogPostRouter.get("/:blogId", async (req, res, next) => {
   try {
     const { blogId } = req.params;
-    const blogPost = await Blog.findById(blogId);
+    const blogPost = await Blog.findById(blogId).populate({
+      path: "authors",
+      select: "firstName lastName",
+    });
     if (blogPost) {
       res.send(blogPost);
     } else {

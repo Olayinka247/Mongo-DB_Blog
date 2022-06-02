@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 import cors from "cors";
 import listEndpoints from "express-list-endpoints";
 import blogPostRouter from "./services/blogs/index.js";
+import authorRouter from "./services/authors/index.js";
 import {
   badRequestHandler,
   notFoundHandler,
@@ -18,6 +19,7 @@ server.use(cors());
 
 // ROUTES
 server.use("/blogs", blogPostRouter);
+server.use("/authors", authorRouter);
 
 //ERROR HANDLING
 server.use(badRequestHandler);
